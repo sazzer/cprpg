@@ -27,7 +27,11 @@ CODE=0
 if cmake $SRC_DIR; then
     if make clean; then
         if make; then
-            CODE=0
+            if make test; then
+                CODE=0
+            else
+                CODE=4
+            fi
         else
             CODE=3
         fi
