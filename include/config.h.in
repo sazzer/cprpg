@@ -1,0 +1,8 @@
+#ifndef CPRPG_CONFIG_H
+#define CPRPG_CONFIG_H
+
+static const int VersionMajor = @CPRPG_VERSION_MAJOR@;
+static const int VersionMinor = @CPRPG_VERSION_MINOR@;
+static const int VersionMicro = @CPRPG_VERSION_MICRO@;
+
+#endif
