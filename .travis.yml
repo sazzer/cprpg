@@ -1,0 +1,4 @@
+language: cpp
+before_install: sudo apt-get update -qq
+install: sudo apt-get install -qq cmake libboost-all-dev
+script: ./build.sh
