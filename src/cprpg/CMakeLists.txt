@@ -3,11 +3,8 @@ PROJECT (CPRPG_CPRPG)
 FILE(GLOB_RECURSE Sources "main/*.cpp")
 FILE(GLOB_RECURSE Tests "test/*.cpp")
 
-FIND_PACKAGE(Boost COMPONENTS system REQUIRED)
-
 ADD_EXECUTABLE(cprpg ${Sources})
 
-FIND_PACKAGE(Boost COMPONENTS unit_test_framework REQUIRED)
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 ADD_EXECUTABLE(cprpg_test ${Tests})
