@@ -1,17 +1,18 @@
-PROJECT (CPRPG_CPRPG)
+PROJECT (CPRPG_VFS)
 
 FILE(GLOB_RECURSE Sources "main/*.cpp")
 FILE(GLOB_RECURSE Tests "test/*.cpp")
 
-ADD_EXECUTABLE(cprpg ${Sources})
+ADD_LIBRARY(cprpg_vfs SHARED ${Sources})
 
 STRING(REPLACE ";" " " TestsAsString "${Tests}")
 IF (NOT "${TestsAsString}" STREQUAL "")
     ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-    ADD_EXECUTABLE(cprpg_test ${Tests})
-    TARGET_LINK_LIBRARIES(cprpg_test ${Boost_LIBRARIES})
+    ADD_EXECUTABLE(vfs_test ${Tests})
+    TARGET_LINK_LIBRARIES(vfs_test ${Boost_LIBRARIES})
+    TARGET_LINK_LIBRARIES(vfs_test cprpg_vfs)
 
     ENABLE_TESTING()
-    ADD_TEST(CPRPG_CPRPG cprpg_test)
+    ADD_TEST(CPRPG_VFS vfs_test)
 ENDIF()
