@@ -23,3 +23,4 @@ ENABLE_TESTING()
 
 ADD_SUBDIRECTORY("src/cprpg")
 ADD_SUBDIRECTORY("src/vfs")
+ADD_SUBDIRECTORY("src/logging")
