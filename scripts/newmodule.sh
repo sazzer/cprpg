@@ -10,7 +10,10 @@ if [ -z "$MODULE_NAME" ]; then
     exit 1;
 fi
 
+PROJECT_NAME=${MODULE_NAME^^}
+LIBRARY_NAME=${MODULE_NAME,,}
 MODULE_DIR="$SRC_DIR/src/$MODULE_NAME"
+
 echo -n "Creating directory structure        "
 if [ -d $MODULE_DIR ]; then
     echo "[31mFailed. Already exists[0m"
@@ -21,10 +24,22 @@ else
     echo "[32mDone[0m"
 fi
 
+echo -n "Creating base test file             "
+if [ -f "$MODULE_DIR/test/test.cpp" ]; then
+    echo "[31mFailed. test.cpp already exists[0m"
+else
+    if grep -r BOOST_TEST_MODULE $MODULE_DIR/test > /dev/null; then
+        echo "[31mFailed. Test file with BOOST_TEST_MODULE already exists[0m"
+    else
+        cat >> $MODULE_DIR/test/test.cpp << __EOF__
+#define BOOST_TEST_MODULE CPRPG_$PROJECT_NAME
+#include <boost/test/unit_test.hpp>
+__EOF__
+    echo "[32mDone[0m"
+    fi
+fi
 
 echo -n "Creating Build file                 "
-PROJECT_NAME=${MODULE_NAME^^}
-LIBRARY_NAME=${MODULE_NAME,,}
 
 if [ -f $MODULE_DIR/CMakeLists.txt ]; then
     echo "[31mFailed. Already exists[0m"
