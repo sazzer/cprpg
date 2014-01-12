@@ -16,7 +16,6 @@ if [ -d $MODULE_DIR ]; then
     echo "[31mFailed. Already exists[0m"
 else
     mkdir -p $MODULE_DIR
-    mkdir -p $MODULE_DIR/include
     mkdir -p $MODULE_DIR/main
     mkdir -p $MODULE_DIR/test
     echo "[32mDone[0m"
