@@ -7,18 +7,13 @@ namespace VFS {
     /**
      * Representation of a single file on disk
      */
-    class File {
+    class DiskFile {
         public:
             /**
              * Construct the file with the given filename
              * @param filename The filename to use
              */
-            File(const std::string& filename) : filename_(filename) {}
-            /**
-             * Construct the file with the given filename
-             * @param filename The filename to use
-             */
-            File(const char* filename) : filename_(filename) {}
+            DiskFile(const std::string& filename) : filename_(filename) {}
             /**
              * Get the filename that we represent
              * @return the filename
