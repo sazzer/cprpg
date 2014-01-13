@@ -10,17 +10,9 @@ namespace VFS {
     class Root {
         public:
             /**
-             * Enumeration of the type of roots that are supported
-             */
-            enum class Type {
-                DIRECTORY,
-                UNKNOWN
-            };
-
-            /**
              * Default constructor
              */
-            Root() : type_(Type::UNKNOWN), 
+            Root() : name_(""), 
                 root_(""),
                 priority_(0) {}
 
@@ -30,26 +22,25 @@ namespace VFS {
             /**
              * Move constructor to reset the one being moved from to a default state
              */
-            Root(Root&& other) : type_(std::move(other.type_)), 
+            Root(Root&& other) : name_(std::move(other.name_)), 
                 root_(std::move(other.root_)), 
                 priority_(std::move(other.priority_)) {
 
-                other.type_ = Type::UNKNOWN;
                 other.priority_ = 0;
             }
             /**
-             * Get the type of root
-             * @return the type of root
+             * Get the name of root
+             * @return the name of root
              */
-            const Type type() const {
-                return type_;
+            const std::string name() const {
+                return name_;
             };
             /**
-             * Set the type of root
-             * @param value The type of root
+             * Set the name of root
+             * @param value The name of root
              */
-            void type(Type value) {
-                type_ = value;
+            void name(std::string value) {
+                name_ = value;
             }
             /**
              * Get the actual value of the root
@@ -81,8 +72,8 @@ namespace VFS {
             }
         protected:
         private:
-            /** The type of root */
-            Type type_;
+            /** The name of root */
+            std::string name_;
             /** The actual location of the root */
             std::string root_;
             /** The priority of the root */
