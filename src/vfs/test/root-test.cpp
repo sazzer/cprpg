@@ -63,7 +63,6 @@ BOOST_AUTO_TEST_CASE(Root_Move) {
 
     BOOST_CHECK_EQUAL("", original.name());
     BOOST_CHECK_EQUAL("", original.root());
-    BOOST_CHECK_EQUAL(0, original.priority());
 }
 
 BOOST_AUTO_TEST_CASE(Root_MoveAssign) {
@@ -79,5 +78,4 @@ BOOST_AUTO_TEST_CASE(Root_MoveAssign) {
 
     BOOST_CHECK_EQUAL("", original.name());
     BOOST_CHECK_EQUAL("", original.root());
-    BOOST_CHECK_EQUAL(0, original.priority());
 }

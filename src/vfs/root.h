@@ -19,15 +19,12 @@ namespace VFS {
             /** Default copy constructor */
             Root(const Root& other) = default;
 
+            /** Default move constructor */
+            Root(Root&& other) = default;
             /**
-             * Move constructor to reset the one being moved from to a default state
+             * Virtual destructor
              */
-            Root(Root&& other) : name_(std::move(other.name_)), 
-                root_(std::move(other.root_)), 
-                priority_(std::move(other.priority_)) {
-
-                other.priority_ = 0;
-            }
+            virtual ~Root() {}
             /**
              * Get the name of root
              * @return the name of root
