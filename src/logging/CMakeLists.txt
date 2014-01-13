@@ -6,6 +6,7 @@ FILE(GLOB_RECURSE Tests "test/*.cpp")
 STRING(REPLACE ";" " " SourcesAsString "${Sources}")
 IF (NOT "${SourcesAsString}" STREQUAL "")
     ADD_LIBRARY(cprpg_logging SHARED ${Sources})
+    add_cppcheck(cprpg_logging)
 
     STRING(REPLACE ";" " " TestsAsString "${Tests}")
     IF (NOT "${TestsAsString}" STREQUAL "")
@@ -19,3 +20,4 @@ IF (NOT "${SourcesAsString}" STREQUAL "")
         ADD_TEST(CPRPG_LOGGING logging_test)
     ENDIF()
 ENDIF()
+

@@ -4,6 +4,7 @@ FILE(GLOB_RECURSE Sources "main/*.cpp")
 FILE(GLOB_RECURSE Tests "test/*.cpp")
 
 ADD_LIBRARY(cprpg_vfs SHARED ${Sources})
+add_cppcheck(cprpg_vfs)
 
 STRING(REPLACE ";" " " TestsAsString "${Tests}")
 IF (NOT "${TestsAsString}" STREQUAL "")

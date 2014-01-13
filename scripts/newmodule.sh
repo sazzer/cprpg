@@ -53,6 +53,7 @@ FILE(GLOB_RECURSE Tests "test/*.cpp")
 STRING(REPLACE ";" " " SourcesAsString "\${Sources}")
 IF (NOT "\${SourcesAsString}" STREQUAL "")
     ADD_LIBRARY(cprpg_${LIBRARY_NAME} SHARED \${Sources})
+    add_cppcheck(cprpg_${LIBRARY_NAME})
 
     STRING(REPLACE ";" " " TestsAsString "\${Tests}")
     IF (NOT "\${TestsAsString}" STREQUAL "")
