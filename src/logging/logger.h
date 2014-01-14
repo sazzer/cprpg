@@ -3,6 +3,7 @@
 
 #include "logging/level.h"
 #include <functional>
+#include <string>
 
 namespace Logging {
     /**
