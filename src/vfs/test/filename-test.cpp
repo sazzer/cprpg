@@ -1,5 +1,5 @@
 #include <boost/test/unit_test.hpp>
-#include "vfs/main/filename.h"
+#include "vfs/filename.h"
 
 BOOST_AUTO_TEST_CASE(Filename_ConstructFromParts) {
     VFS::Filename filename("core", "assets/logo.png");
