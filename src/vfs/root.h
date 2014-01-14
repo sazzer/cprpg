@@ -59,7 +59,7 @@ namespace VFS {
              * Get the priority of the root
              * @return the priority of the root
              */
-            const int priority() const {
+            int priority() const {
                 return priority_;
             }
             /**

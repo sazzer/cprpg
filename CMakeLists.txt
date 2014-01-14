@@ -16,6 +16,10 @@ IF (CXX11_COMPILER)
     enable_cxx11()
 ENDIF()
 
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -pedantic-errors -Wextra -Werror -Wno-unused-parameter")
+endif()
+
 CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/include/config.h.in" "${PROJECT_BINARY_DIR}/include/config.h")
 
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}/include")
