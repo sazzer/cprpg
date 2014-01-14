@@ -2,6 +2,8 @@
 #define CPRPG_VFS_ROOT_H
 
 #include <string>
+#include <memory>
+#include "vfs/file.h"
 
 namespace VFS {
     /**
@@ -67,6 +69,20 @@ namespace VFS {
             void priority(int value) {
                 priority_ = value;
             }
+
+            /**
+             * Determine if the given file exists in this root
+             * @param filename The name of the file to resolve
+             * @return true if the file exists. False if not
+             */
+            virtual bool exists(const std::string& filename) = 0;
+
+            /**
+             * Attempt to load the given file.
+             * @param filename The name of the file to load
+             * @return The loaded file, or an empty pointer if it doesn't exist
+             */
+            virtual std::unique_ptr<File> load(const std::string& filename) = 0;
         protected:
         private:
             /** The name of root */

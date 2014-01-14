@@ -1,15 +1,28 @@
 #include <boost/test/unit_test.hpp>
 #include "vfs/root.h"
 
+/**
+ * VFS::Root is pure virtual, so this implements the method we need
+ */
+class UnitTestRoot : public VFS::Root {
+    public:
+        bool exists(const std::string& filename) {
+            return false;
+        }
+        std::unique_ptr<VFS::File> load(const std::string& filename) {
+            return std::unique_ptr<VFS::File>();
+        }
+};
+
 BOOST_AUTO_TEST_CASE(Root_DefaultConstructor) {
-    VFS::Root root;
+    UnitTestRoot root;
     BOOST_CHECK_EQUAL("", root.name());
     BOOST_CHECK_EQUAL("", root.root());
     BOOST_CHECK_EQUAL(0, root.priority());
 }
 
 BOOST_AUTO_TEST_CASE(Root_SetValues) {
-    VFS::Root root;
+    UnitTestRoot root;
     root.name("test");
     root.root("/tmp");
     root.priority(10);
@@ -19,12 +32,12 @@ BOOST_AUTO_TEST_CASE(Root_SetValues) {
 }
 
 BOOST_AUTO_TEST_CASE(Root_Copy) {
-    VFS::Root original;
+    UnitTestRoot original;
     original.name("test");
     original.root("/tmp");
     original.priority(10);
 
-    VFS::Root root(original);
+    UnitTestRoot root(original);
     BOOST_CHECK_EQUAL("test", root.name());
     BOOST_CHECK_EQUAL("/tmp", root.root());
     BOOST_CHECK_EQUAL(10, root.priority());
@@ -35,12 +48,12 @@ BOOST_AUTO_TEST_CASE(Root_Copy) {
 }
 
 BOOST_AUTO_TEST_CASE(Root_Assign) {
-    VFS::Root original;
+    UnitTestRoot original;
     original.name("test");
     original.root("/tmp");
     original.priority(10);
 
-    VFS::Root root = original;
+    UnitTestRoot root = original;
     BOOST_CHECK_EQUAL("test", root.name());
     BOOST_CHECK_EQUAL("/tmp", root.root());
     BOOST_CHECK_EQUAL(10, root.priority());
@@ -51,12 +64,12 @@ BOOST_AUTO_TEST_CASE(Root_Assign) {
 }
 
 BOOST_AUTO_TEST_CASE(Root_Move) {
-    VFS::Root original;
+    UnitTestRoot original;
     original.name("test");
     original.root("/tmp");
     original.priority(10);
 
-    VFS::Root root(std::move(original));
+    UnitTestRoot root(std::move(original));
     BOOST_CHECK_EQUAL("test", root.name());
     BOOST_CHECK_EQUAL("/tmp", root.root());
     BOOST_CHECK_EQUAL(10, root.priority());
@@ -66,12 +79,12 @@ BOOST_AUTO_TEST_CASE(Root_Move) {
 }
 
 BOOST_AUTO_TEST_CASE(Root_MoveAssign) {
-    VFS::Root original;
+    UnitTestRoot original;
     original.name("test");
     original.root("/tmp");
     original.priority(10);
 
-    VFS::Root root = std::move(original);
+    UnitTestRoot root = std::move(original);
     BOOST_CHECK_EQUAL("test", root.name());
     BOOST_CHECK_EQUAL("/tmp", root.root());
     BOOST_CHECK_EQUAL(10, root.priority());
