@@ -10,7 +10,7 @@ SET (CPRPG_VERSION_MINOR 0)
 SET (CPRPG_VERSION_MICRO 0)
 
 FIND_PACKAGE(cppcheck)
-FIND_PACKAGE(Boost COMPONENTS system unit_test_framework REQUIRED)
+FIND_PACKAGE(Boost COMPONENTS system filesystem unit_test_framework REQUIRED)
 check_for_cxx11_compiler(CXX11_COMPILER)
 IF (CXX11_COMPILER)
     enable_cxx11()

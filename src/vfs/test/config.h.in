@@ -1,0 +1,7 @@
+#ifndef CPRPG_VFS_TEST_CONFIG_H
+#define CPRPG_VFS_TEST_CONFIG_H
+
+static const char* SOURCE_DIRECTORY = "@PROJECT_SOURCE_DIR@";
+
+#endif
+
