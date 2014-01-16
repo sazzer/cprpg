@@ -4,7 +4,7 @@
 
 const std::string rootBase = std::string(SOURCE_DIRECTORY) + "/test/vfs/root1";
 
-BOOST_AUTO_TEST_CASE(DirectoryRoot_TestExists) {
+BOOST_AUTO_TEST_CASE(DirectoryRoot_TestExistsFile) {
     VFS::Roots::Directory root;
     root.name("test");
     root.root(rootBase);
@@ -16,7 +16,17 @@ BOOST_AUTO_TEST_CASE(DirectoryRoot_TestExists) {
     BOOST_CHECK(!root.exists("b/a.txt"));
 }
 
-BOOST_AUTO_TEST_CASE(DirectoryRoot_TestLoad) {
+BOOST_AUTO_TEST_CASE(DirectoryRoot_TestExistsDirectory) {
+    VFS::Roots::Directory root;
+    root.name("test");
+    root.root(rootBase);
+    root.priority(10);
+
+    BOOST_CHECK(root.exists("a"));
+    BOOST_CHECK(root.exists("b"));
+}
+
+BOOST_AUTO_TEST_CASE(DirectoryRoot_TestLoadFile) {
     VFS::Roots::Directory root;
     root.name("test");
     root.root(rootBase);
@@ -25,12 +35,22 @@ BOOST_AUTO_TEST_CASE(DirectoryRoot_TestLoad) {
     BOOST_CHECK(!root.load("a/b.txt"));
     BOOST_CHECK(!root.load("b/a.txt"));
 
-    /* Not implemented yet
     auto a = root.load("a/a.txt");
     auto b = root.load("b/b.txt");
     BOOST_CHECK(a);
     BOOST_CHECK(b);
-    */
+    BOOST_CHECK_EQUAL("This is file A\n", a->readAsText());
+    BOOST_CHECK_EQUAL("This is file B\n", b->readAsText());
+}
+
+BOOST_AUTO_TEST_CASE(DirectoryRoot_TestLoadDirectory) {
+    VFS::Roots::Directory root;
+    root.name("test");
+    root.root(rootBase);
+    root.priority(10);
+
+    BOOST_CHECK(!root.load("a"));
+    BOOST_CHECK(!root.load("b"));
 }
 
 BOOST_AUTO_TEST_CASE(DirectoryRoot_DefaultConstructor) {

@@ -22,8 +22,8 @@ namespace VFS {
         std::unique_ptr<File> Directory::load(const std::string& filename) {
             std::unique_ptr<File> result;
             boost::filesystem::path p = boost::filesystem::path(root()) / filename;
-            if (boost::filesystem::exists(p)) {
-
+            if (boost::filesystem::exists(p) && boost::filesystem::is_regular_file(p)) {
+                result.reset(new VFS::Files::Disk(p.native()));
             }
 
             return result;
