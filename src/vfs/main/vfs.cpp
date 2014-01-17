@@ -23,15 +23,24 @@ namespace VFS {
             }
             const std::shared_ptr<Root> findRoot(const Filename& filename) const {
                 std::shared_ptr<Root> result;
-                for (auto i = roots.begin(); !result && i != roots.end(); ++i) {
-                    const std::shared_ptr<Root> root = *i;
-                    if (root->exists(filename.path())) {
-                        LOG(Logging::Level::DEBUG, "Found file in root: " + root->name());
-                        result = root;
+                const std::string& rootName = filename.root();
+                if (rootName.empty()) {
+                    for (auto i = roots.begin(); !result && i != roots.end(); ++i) {
+                        const std::shared_ptr<Root> root = *i;
+                        if (root->exists(filename.path())) {
+                            result = root;
+                        }
+                    }
+                } else {
+                    auto found = rootsByName.find(rootName);
+                    if (found != rootsByName.end()) {
+                        result = found->second;
                     }
                 }
 
-                if (!result) {
+                if (result) {
+                    LOG(Logging::Level::DEBUG, "Found file in root: " + result->name());
+                } else {
                     LOG(Logging::Level::DEBUG, "Didn't find file in any root: " + (std::string)filename);
                 }
                 return result;

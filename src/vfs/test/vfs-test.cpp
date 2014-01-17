@@ -18,6 +18,9 @@ BOOST_AUTO_TEST_CASE(VFS_TestExistsFile) {
     BOOST_CHECK(vfs.exists(std::string("b/b.txt")));
     BOOST_CHECK(!vfs.exists(std::string("a/b.txt")));
     BOOST_CHECK(!vfs.exists(std::string("b/a.txt")));
+
+    BOOST_CHECK(vfs.exists(std::string("test:a/a.txt")));
+    BOOST_CHECK(!vfs.exists(std::string("test2:a/a.txt")));
 }
 
 BOOST_AUTO_TEST_CASE(VFS_TestExistsDirectory) {
@@ -32,6 +35,9 @@ BOOST_AUTO_TEST_CASE(VFS_TestExistsDirectory) {
     BOOST_CHECK(vfs.exists(std::string("a")));
     BOOST_CHECK(vfs.exists(std::string("b")));
     BOOST_CHECK(!vfs.exists(std::string("c")));
+
+    BOOST_CHECK(vfs.exists(std::string("test:a")));
+    BOOST_CHECK(!vfs.exists(std::string("test2:a")));
 }
 
 BOOST_AUTO_TEST_CASE(VFS_TestLoadFile) {
@@ -45,13 +51,17 @@ BOOST_AUTO_TEST_CASE(VFS_TestLoadFile) {
 
     BOOST_CHECK(!vfs.load(std::string("a/b.txt")));
     BOOST_CHECK(!vfs.load(std::string("b/a.txt")));
+    BOOST_CHECK(!vfs.load(std::string("test2:a/a.txt")));
 
     auto a = vfs.load(std::string("a/a.txt"));
     auto b = vfs.load(std::string("b/b.txt"));
+    auto c = vfs.load(std::string("test:a/a.txt"));
     BOOST_CHECK(a);
     BOOST_CHECK(b);
+    BOOST_CHECK(c);
     BOOST_CHECK_EQUAL("This is file A\n", a->readAsText());
     BOOST_CHECK_EQUAL("This is file B\n", b->readAsText());
+    BOOST_CHECK_EQUAL("This is file A\n", c->readAsText());
 }
 
 BOOST_AUTO_TEST_CASE(VFS_TestLoadDirectory) {
