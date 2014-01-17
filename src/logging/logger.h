@@ -14,7 +14,7 @@ namespace Logging {
             /**
              * Construct the logger
              */
-            Logger(const char* group);
+            Logger(const std::string& group);
             /**
              * No copy constructor
              */
@@ -29,13 +29,7 @@ namespace Logging {
              * @param level The level to write at
              * @param message The message to write
              */
-            void operator()(const Level& level, const char* message) const;
-            /**
-             * Write a log message out, as returned by the provided function
-             * @param level The level to write at
-             * @param message The function to generate the message to write
-             */
-            void operator()(const Level& level, std::function<const char*()> message) const;
+            void operator()(const Level& level, const std::string& message) const;
         protected:
         private:
             std::string group_;

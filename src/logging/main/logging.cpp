@@ -27,7 +27,7 @@ namespace Logging {
      * @param group The group to write to
      * @param message The message to write
      */
-    void log(const Level& level, const char* group, const char* message) {
+    void log(const Level& level, const std::string& group, const std::string& message) {
         auto now = std::chrono::system_clock::now();
         auto now_c = std::chrono::system_clock::to_time_t(now);
 
@@ -40,14 +40,5 @@ namespace Logging {
         std::cerr << now_c;
 
         std::cerr << "[" << group << "] " << message << std::endl;
-    }
-    /*
-     * Write a log message out, as returned by the provided function
-     * @param level The level to write at
-     * @param group The group to write to
-     * @param message The function to generate the message to write
-     */
-    void log(const Level& level, const char* group, std::function<const char*()> message) {
-        log(level, group, message());
     }
 }
