@@ -6,6 +6,7 @@ FILE(GLOB_RECURSE Tests "test/*.cpp")
 ADD_LIBRARY(cprpg_vfs SHARED ${Sources})
 TARGET_LINK_LIBRARIES(cprpg_vfs ${Boost_SYSTEM_LIBRARIES})
 TARGET_LINK_LIBRARIES(cprpg_vfs ${Boost_FILESYSTEM_LIBRARIES})
+TARGET_LINK_LIBRARIES(cprpg_vfs cprpg_logging)
 add_cppcheck(cprpg_vfs)
 
 CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/test/config.h.in" "${PROJECT_BINARY_DIR}/vfs/test/config.h")

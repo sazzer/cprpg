@@ -24,6 +24,7 @@ BOOST_AUTO_TEST_CASE(DirectoryRoot_TestExistsDirectory) {
 
     BOOST_CHECK(root.exists("a"));
     BOOST_CHECK(root.exists("b"));
+    BOOST_CHECK(!root.exists("c"));
 }
 
 BOOST_AUTO_TEST_CASE(DirectoryRoot_TestLoadFile) {
