@@ -9,6 +9,7 @@ ADD_EXECUTABLE(cprpg ${Sources})
 TARGET_LINK_LIBRARIES(cprpg ${SDL2_LIBRARIES})
 TARGET_LINK_LIBRARIES(cprpg ${OPENGL_LIBRARIES})
 TARGET_LINK_LIBRARIES(cprpg cprpg_logging)
+TARGET_LINK_LIBRARIES(cprpg cprpg_ui)
 
 STRING(REPLACE ";" " " TestsAsString "${Tests}")
 IF (NOT "${TestsAsString}" STREQUAL "")

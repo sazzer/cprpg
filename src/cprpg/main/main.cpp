@@ -1,7 +1,7 @@
 #include "config.h"
 #include "logging/logger.h"
 #include <SDL.h>
-#include <GL/gl.h>
+#include "ui/main/gl/version.h"
 
 static const Logging::Logger LOG("cprpg");
 
@@ -33,9 +33,7 @@ int main(void) {
         return 3;
     }
 
-    int major, minor;
-    glGetIntegerv(GL_MAJOR_VERSION, &major);
-    glGetIntegerv(GL_MINOR_VERSION, &minor);
-    printf("%d.%d\n", major, minor);
+    UI::GL::Version version;
+    printf("%d.%d\n", version.major(), version.minor());
     return 0;
 }

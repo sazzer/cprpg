@@ -5,7 +5,10 @@ FILE(GLOB_RECURSE Tests "test/*.cpp")
 
 STRING(REPLACE ";" " " SourcesAsString "${Sources}")
 IF (NOT "${SourcesAsString}" STREQUAL "")
+    INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIRS})
     ADD_LIBRARY(cprpg_ui SHARED ${Sources})
+    TARGET_LINK_LIBRARIES(cprpg_ui ${OPENGL_LIBRARIES})
+    TARGET_LINK_LIBRARIES(cprpg_ui cprpg_logging)
     add_cppcheck(cprpg_ui)
 
     STRING(REPLACE ";" " " TestsAsString "${Tests}")
