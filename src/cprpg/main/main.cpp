@@ -35,5 +35,10 @@ int main(void) {
 
     UI::GL::Version version;
     printf("%d.%d\n", version.major(), version.minor());
+    printf("%s\n%s\n", version.vendor().c_str(), version.renderer().c_str());
+    for (std::string e : version.extensions()) {
+        printf("%s : ", e.c_str());
+    }
+    printf("%s\n", version.hasExtension("GL_ARB_texture_storage") ? "Yes" : "No");
     return 0;
 }
