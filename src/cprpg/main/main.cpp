@@ -1,7 +1,7 @@
 #include "config.h"
 #include "logging/logger.h"
 #include <SDL.h>
-#include "ui/main/gl/version.h"
+#include "ui/renderer.h"
 
 static const Logging::Logger LOG("cprpg");
 
@@ -33,13 +33,6 @@ int main(void) {
         return 3;
     }
 
-    UI::GL::Version version;
-    printf("%d.%d\n", version.major(), version.minor());
-    printf("%s\n%s\n", version.vendor().c_str(), version.renderer().c_str());
-    for (std::string e : version.extensions()) {
-        printf("%s : ", e.c_str());
-    }
-    printf("%s\n", version.hasExtension("GL_ARB_texture_storage") ? "Yes" : "No");
-    printf("%d\n", version.getVersion());
+    auto renderer = UI::createRenderer();
     return 0;
 }

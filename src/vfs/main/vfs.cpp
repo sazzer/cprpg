@@ -3,7 +3,7 @@
 #include <list>
 #include "logging/logger.h"
 
-static Logging::Logger LOG("vfs");
+static Logging::Logger LOG("cprpg.vfs.vfs");
 
 namespace VFS {
     /**
