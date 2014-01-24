@@ -40,5 +40,6 @@ int main(void) {
         printf("%s : ", e.c_str());
     }
     printf("%s\n", version.hasExtension("GL_ARB_texture_storage") ? "Yes" : "No");
+    printf("%d\n", version.getVersion());
     return 0;
 }
