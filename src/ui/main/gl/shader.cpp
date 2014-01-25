@@ -20,7 +20,7 @@ namespace UI {
             }
 
             id_ = glCreateShader(shaderType);
-            if (id_ == 0) {
+            if (id_ != 0) {
                 LOG(Logging::Level::TRACE, "Created shader");
             } else {
                 LOG(Logging::Level::ERROR, "Failed to create shader");

@@ -2,6 +2,7 @@
 #include "ui/main/gl/version.h"
 #include "logging/logger.h"
 #include "ui/main/gl/shader.h"
+#include "ui/main/gl/program.h"
 
 namespace UI {
     static const Logging::Logger LOG("cprpg.ui.gl.renderer");
@@ -12,8 +13,10 @@ namespace UI {
         class Renderer : public UI::Renderer {
             public:
                 Renderer() {
-                    Shader vertexShader(ShaderType::VERTEX);
-                    vertexShader.source("void main(void) {\nvec4 a = gl_Vertex;\ngl_Position = gl_ModelViewProjectionMatrix * a;\n}");
+                    Program program;
+                    std::shared_ptr<Shader> vertexShader(new Shader(ShaderType::VERTEX));
+                    vertexShader->source("void main(void) {\nvec4 a = gl_Vertex;\ngl_Position = gl_ModelViewProjectionMatrix * a;\n}");
+                    program.addShader(vertexShader);
                 }
                 virtual ~Renderer() {}
         };

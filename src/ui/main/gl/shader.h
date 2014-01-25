@@ -12,6 +12,8 @@ namespace UI {
             VERTEX,
             FRAGMENT
         };
+        // Forward declaration
+        class Program;
         /**
          * Representation of a shader
          */
@@ -31,9 +33,21 @@ namespace UI {
                  * @param source The source of the shader
                  */
                 void source(const std::string& source);
+                /**
+                 * Get the type of the shader
+                 * @return the type of the shader
+                 */
+                ShaderType type() const {
+                    return type_;
+                }
             protected:
             private:
+                /** The ID of the shader */
                 int id_;
+                /** The type of the shader */
+                ShaderType type_;
+                /** Programs are friends */
+                friend class Program;
         };
     }
 }
