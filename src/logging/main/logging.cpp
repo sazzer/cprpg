@@ -27,6 +27,16 @@ namespace Logging {
      * @param group The group to write to
      * @param message The message to write
      */
+    void log(const Level& level, const std::string& group, const boost::format& message) {
+        log(level, group, message.str());
+    }
+
+    /**
+     * Write a log message out
+     * @param level The level to write at
+     * @param group The group to write to
+     * @param message The message to write
+     */
     void log(const Level& level, const std::string& group, const std::string& message) {
         auto now = std::chrono::system_clock::now();
         auto now_c = std::chrono::system_clock::to_time_t(now);

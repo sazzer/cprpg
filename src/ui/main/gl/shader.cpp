@@ -21,7 +21,7 @@ namespace UI {
 
             id_ = glCreateShader(shaderType);
             if (id_ != 0) {
-                LOG(Logging::Level::TRACE, "Created shader");
+                LOG(Logging::Level::TRACE, boost::format("Created shader: %d") % id_);
             } else {
                 LOG(Logging::Level::ERROR, "Failed to create shader");
             }
@@ -33,9 +33,9 @@ namespace UI {
             glDeleteShader(id_);
             int err = glGetError();
             if (err == GL_NO_ERROR) {
-                LOG(Logging::Level::TRACE, "Destroyed shader");
+                LOG(Logging::Level::TRACE, boost::format("Destroyed shader: %d") % id_);
             } else {
-                LOG(Logging::Level::ERROR, "Failed to delete shader");
+                LOG(Logging::Level::ERROR, boost::format("Failed to delete shader: %d") % id_);
             }
         }
         /**
@@ -48,20 +48,20 @@ namespace UI {
             glShaderSource(id_, 1, &src, &len);
             int err = glGetError();
             if (err == GL_NO_ERROR) {
-                LOG(Logging::Level::TRACE, "Set the source code for the shader");
+                LOG(Logging::Level::TRACE, boost::format("Set the source code shader: %d") % id_);
                 glCompileShader(id_);
                 glGetShaderiv(id_, GL_COMPILE_STATUS, &err);
 
                 if (err == GL_TRUE) {
-                    LOG(Logging::Level::TRACE, "Compiled shader");
+                    LOG(Logging::Level::TRACE, boost::format("Compiled shader: %d") % id_);
                 } else {
-                    LOG(Logging::Level::ERROR, "Failed to compile shader");
+                    LOG(Logging::Level::ERROR, boost::format("Failed to compile shader: %d") % id_);
                     char infoLog[1024];
                     glGetShaderInfoLog(id_, 1024, &err, infoLog);
                     LOG(Logging::Level::ERROR, infoLog);
                 }
             } else {
-                LOG(Logging::Level::ERROR, "Failed to set source code for the shader");
+                LOG(Logging::Level::ERROR, boost::format("Failed to set source code for shader: %d") % id_);
             }
         }
     }

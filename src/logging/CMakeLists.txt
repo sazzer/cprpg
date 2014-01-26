@@ -6,6 +6,7 @@ FILE(GLOB_RECURSE Tests "test/*.cpp")
 STRING(REPLACE ";" " " SourcesAsString "${Sources}")
 IF (NOT "${SourcesAsString}" STREQUAL "")
     ADD_LIBRARY(cprpg_logging SHARED ${Sources})
+    TARGET_LINK_LIBRARIES(cprpg_logging ${Boost_SYSTEM_LIBRARIES})
     add_cppcheck(cprpg_logging)
 
     STRING(REPLACE ";" " " TestsAsString "${Tests}")
